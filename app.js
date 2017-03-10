@@ -1,10 +1,7 @@
 const express = require('express');
 const port = process.env.PORT || 8000;
 const app = express();
-const knex = require('knex')();
 const server = app.listen(port, () => console.log('Listening on port %d', server.address().port));
-
-sequelize.sync().then(() => console.log('Sync done'));
 
 app.use('*', function(req, res, next) {
   const user = process.env.API_USER;
