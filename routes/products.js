@@ -8,19 +8,19 @@ module.exports = function (server, models) {
   );
 
   server.post('/products', auth, (req, res, next) =>
-    models.products.create()
+    models.products.create(req.body)
       .then(data => res.send(data))
       .catch(error => next(error))
   );
 
-  server.put('/products', auth, (req, res, next) =>
-    models.products.update()
+  server.put('/products/:id', auth, (req, res, next) =>
+    models.products.update(req.params.id, req.body)
       .then(data => res.send(data))
       .catch(error => next(error))
   );
 
-  server.del('/products', auth, (req, res, next) =>
-    models.products.remove()
+  server.del('/products/:id', auth, (req, res, next) =>
+    models.products.remove(req.params.id)
       .then(data => res.send(data))
       .catch(error => next(error))
   );
