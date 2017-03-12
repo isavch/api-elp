@@ -1,9 +1,8 @@
-const express = require('express');
+const restify = require('restify');
 const port = process.env.PORT || 8000;
-const app = express();
-const server = app.listen(port, () => console.log('Listening on port %d', server.address().port));
+const server = restify.createServer({name: 'ELP'});
 
-app.use('*', function(req, res, next) {
+server.use(function(req, res, next) {
   const user = process.env.API_USER;
   const password = process.env.API_PASSWORD;
   const securityToken = `${user}_${password}`;
@@ -16,6 +15,6 @@ app.use('*', function(req, res, next) {
   return next();
 });
 
-app.get('*', (req, res) => {
-  res.send('I\'m alive');
-});
+server.get('/', (req, res) => res.send('I\'m alive'));
+
+server.listen(port, () => console.log('Listening on port %d', port));
