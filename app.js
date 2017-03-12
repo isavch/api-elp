@@ -1,20 +1,14 @@
 const restify = require('restify');
 const port = process.env.PORT || 8000;
-const server = restify.createServer({name: 'ELP'});
+const routes = require('./routes');
+const server = restify.createServer();
 
-server.use(function(req, res, next) {
-  const user = process.env.API_USER;
-  const password = process.env.API_PASSWORD;
-  const securityToken = `${user}_${password}`;
-  const authToken = req.headers.authorization;
+/* Middleware*/
+server.use(restify.queryParser());
+server.use(restify.bodyParser());
 
-  if (!authToken || authToken !== securityToken) {
-    return res.send(401);
-  }
+/* Routes initialize*/
+routes(server);
 
-  return next();
-});
-
-server.get('/', (req, res) => res.send('I\'m alive'));
-
+/* Server start*/
 server.listen(port, () => console.log('Listening on port %d', port));
