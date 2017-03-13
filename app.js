@@ -14,3 +14,5 @@ routes(server, models(db));
 
 /* Server start*/
 server.listen(port, () => console.log('Listening on port %d', port));
+
+module.exports = server;

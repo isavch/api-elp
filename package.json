@@ -6,8 +6,11 @@
   "scripts": {
     "start": "node ./app.js",
     "knex:make": "knex migrate:make",
+    "knex:seed": "knex seed:make",
+    "knex:run": "knex seed:run",
     "knex:apply": "knex migrate:latest",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint *.js",
+    "test": "mocha **/*.spec.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,7 @@
   },
   "homepage": "https://github.com/ivanu4/api-elp#readme",
   "dependencies": {
+    "jsonwebtoken": "^7.3.0",
     "knex": "^0.12.7",
     "pg": "^6.1.4",
     "restify": "^4.3.0"
@@ -27,6 +31,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "eslint": "^3.17.1",
     "mocha": "^3.2.0"
   }
 }

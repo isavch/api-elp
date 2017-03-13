@@ -1,7 +1,7 @@
 const auth = require('../middleware/auth');
 
 module.exports = function (server, models) {
-  server.get('/products', auth, (req, res, next) =>
+  server.get('/products', (req, res, next) =>
     models.products.all()
       .then(items => res.send(items))
       .catch(error => next(error))
